@@ -17,7 +17,7 @@ app.post('/api/analyze', async (req, res) => {
     try {
         const { jobDescription, resume } = req.body;
 
-        const prompt = `Evaluate the following resume based on the provided job description. Grade the resume on a scale of 1-10 for the following aspects: 
+        const prompt = `Evaluate the following resume based on the provided job description. Grade the resume on a scale of 1-100 including decimals for the following aspects: 
 1. Skill Match 
 2. Experience Relevance 
 3. Overall Fit.
@@ -28,7 +28,25 @@ ${jobDescription}
 Resume:
 ${resume}
 
-Provide a short explanation for each score. Keep the result professional and don't add *'s`;
+Provide a short explanation for each score. Keep the result professional and don't add any bold words.The threshold for passing is 70 percent
+
+The overall output should be something like this
+Skill Match Score
+Explanation
+
+Experience Relevance Score
+Explanation
+
+Overall Fit Explantion
+Overall Fit Score
+
+Pass or Fail
+
+Things which can be improved
+
+
+Also do not metion Skill Match explanation, experience relevance explanation etc in the output.
+`;
 
         const result = await model.generateContent(prompt);
         const response = result.response.text();
