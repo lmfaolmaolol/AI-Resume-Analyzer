@@ -1,56 +1,634 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Analyzer</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 100vh;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
+            background: linear-gradient(to bottom, #010101, #35024d);
+            color: goldenrod;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
         }
+
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 1300px;
+            padding-bottom: 20px;
         }
-        .input-group {
+        .container1{
+            padding:20px;
+            width: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: goldenrod;;
             margin-bottom: 20px;
         }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            color: goldenrod;
+            opacity:0.7;
+            margin-bottom: 8px;
+        }
+
         textarea {
             width: 100%;
-            height: 200px;
+            height: 150px;
             margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
             resize: vertical;
-        }
-        button {
-            background-color: #007bff;
+            background-color: transparent;
             color: white;
-            padding: 10px 20px;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        button {
+            display: block;
+            margin:auto;
+            width: 50%;
+            background-color: transparent;
+            color: white;
+            padding: 15px 0;
+            font-size: 1.2em;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background 0.3s ease;
+            border:solid 2px #ddd;
         }
+
+        button:hover {
+            background: goldenrod;
+        }
+
         button:disabled {
-            background-color: #ccc;
+            background: #ccc;
+            cursor: not-allowed;
         }
+
         #result {
-            margin-top: 20px;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: transparent;
+            
+            border-radius: 8px;
             white-space: pre-wrap;
+        }
+
+        .main {
+            display: flex;
+        }
+
+        .Letters {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            height: 175px;
+            font-size: 135px;
+            color: goldenrod;
+            border: 5px solid rgba(255, 255, 255, 0.589);
+            overflow: hidden;
+            border: 0;
+        }
+
+        .left {
+            border-right: 0;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+        }
+
+
+        .right {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .first span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 17;
+        }
+
+        .sec span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 4;
+
+        }
+
+        .third span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 18;
+
+        }
+
+        .fourth span {
+            --ch: 20;
+            animation: scroll 3s ease-in-out forwards;
+        }
+
+        .fifth span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 12;
+
+        }
+
+        .sixth span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 4;
+
+        }
+
+        .seventh span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 0;
+
+        }
+
+        .eight span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 13;
+
+        }
+
+        .ninth span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 0;
+
+        }
+
+        .tenth span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 11;
+
+        }
+
+        .eleventh span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 24;
+
+        }
+
+        .twelth span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 25;
+
+        }
+
+        .thirteenth span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 4;
+
+
+        }
+
+        .fourteenth span {
+            animation: scroll 3s ease-in-out forwards;
+            --ch: 17;
+
+        }
+        @keyframes scroll {
+            to {
+                transform: translateY(calc(var(--ch)*-100%));
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Resume Analyzer</h1>
-        
+        <div class="main">
+            <div class="first Letters left">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="sec Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="third Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="fourth Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="fifth Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="sixth Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="Letters"><span></span></div>
+            <div class="seventh Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="eight Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="ninth Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="tenth Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="eleventh Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="twelth Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="thirteenth Letters">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+            <div class="fourteenth Letters right">
+                <span> </span>
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+                <span>K</span>
+                <span>L</span>
+                <span>M</span>
+                <span>N</span>
+                <span>O</span>
+                <span>P</span>
+                <span>Q</span>
+                <span>R</span>
+                <span>S</span>
+                <span>T</span>
+                <span>U</span>
+                <span>V</span>
+                <span>W</span>
+                <span>X</span>
+                <span>Y</span>
+                <span>Z</span>
+            </div>
+        </div>
+    </div>
+        <div class="container1">
+
         <div class="input-group">
             <h3>Job Description</h3>
             <textarea id="jobDescription" placeholder="Paste the job description here..."></textarea>
@@ -64,6 +642,7 @@
         <button onclick="analyzeResume()" id="analyzeBtn">Analyze</button>
 
         <div id="result"></div>
+    </div>
     </div>
 
     <script>
@@ -103,4 +682,5 @@
         }
     </script>
 </body>
+
 </html>
