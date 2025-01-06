@@ -26,17 +26,54 @@ const app = express();
 
 // Middleware configuration
 // Middleware configuration
-app.use(cors({
-    origin: [
-        'http://127.0.0.1:5500', 
-        'https://monkey-sweeping-bug.ngrok-free.app',
-        'https://ai-resume-analyzer-one.vercel.app'
-    ],
+// CORS configuration with dynamic origin handling
+const corsOptions = {
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'http://127.0.0.1:5500', 
+            'https://monkey-sweeping-bug.ngrok-free.app',
+            'https://ai-resume-analyzer-one.vercel.app',
+            /\.vercel\.app$/  // Regex to match any Vercel app
+        ];
+
+        console.log('Incoming Origin:', origin);
+
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+
+        // Check if the origin is in the allowed list or matches a pattern
+        const isAllowed = allowedOrigins.some(allowedOrigin => 
+            typeof allowedOrigin === 'string' 
+                ? origin === allowedOrigin 
+                : allowedOrigin.test(origin)
+        );
+
+        if (isAllowed) {
+            callback(null, true);
+        } else {
+            console.error('Origin not allowed:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept'],
     credentials: true,
     optionsSuccessStatus: 200
-}));// Enable Cross-Origin Resource Sharing
+};
+
+// Apply CORS with detailed options
+app.use(cors(corsOptions));
+
+// Detailed logging middleware
+app.use((req, res, next) => {
+    console.log('Request Details:');
+    console.log('Method:', req.method);
+    console.log('URL:', req.url);
+    console.log('Origin:', req.get('origin'));
+    console.log('Referrer:', req.get('referrer'));
+    console.log('Headers:', JSON.stringify(req.headers, null, 2));
+    next();
+});
 app.use(express.json());// Parse JSON request bodies
 app.use(express.static('.'));// Serve static files from the current directory
 // Add logging middleware before CORS
