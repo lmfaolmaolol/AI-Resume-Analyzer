@@ -1,22 +1,58 @@
+/**
+ * Resume Analyzer Server
+ * 
+ * This module sets up an Express.js server that provides an AI-powered resume analysis endpoint
+ * using Google's Gemini AI. It handles CORS, JSON parsing, and serves static files.
+ * 
+ * @module ResumeAnalyzerServer
+ * @requires express
+ * @requires cors
+ * @requires dotenv
+ * @requires @google/generative-ai
+ */
+
+
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
+// Load environment variables from .env file
 dotenv.config();
 
+// Initialize Express application
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static('.'));
 
+// Middleware configuration
+app.use(cors({
+    origin: ['http://127.0.0.1:5500', 'https://monkey-sweeping-bug.ngrok-free.app'],
+    credentials: true
+  }));// Enable Cross-Origin Resource Sharing
+app.use(express.json());// Parse JSON request bodies
+app.use(express.static('.'));// Serve static files from the current directory
+
+// Initialize Google Generative AI with API key from environment
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+
+/**
+ * Analyze Resume Endpoint
+ * 
+ * Receives job description and resume text, uses Gemini AI to evaluate resume
+ * and generate a comprehensive analysis.
+ * 
+ * @route POST /api/analyze
+ * @param {Object} req.body - Request body containing job description and resume
+ * @param {string} req.body.jobDescription - Detailed job description
+ * @param {string} req.body.resume - Resume text to be analyzed
+ * @returns {Object} Analysis results including scores and explanations
+ */
 app.post('/api/analyze', async (req, res) => {
     try {
         const { jobDescription, resume } = req.body;
-
+// Detailed prompt for comprehensive resume analysis
         const prompt = `Evaluate the following resume based on the provided job description. Grade the resume on a scale of 1-100 including decimals for the following aspects: 
 1. Skill Match 
 2. Experience Relevance 
@@ -58,7 +94,9 @@ Also do not metion Skill Match explanation, experience relevance explanation etc
     }
 });
 
-const PORT = process.env.PORT || 3000;
+// Server configuration
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Resume Analyzer Server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
