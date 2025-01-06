@@ -18,12 +18,13 @@ A web application that analyzes resumes against job descriptions using Google's 
 3. Create a `.env` file in the root directory and add your Google API key:
    ```
    GOOGLE_API_KEY=your_api_key_here
-   PORT=3000
+   PORT=8080
    ```
 4. Start the development server:
    ```bash
-   npm run dev
+   node server.js
    ```
+5. Open the index.html file in a browser
 
 The application will start on:
 - Frontend: http://localhost:5173
