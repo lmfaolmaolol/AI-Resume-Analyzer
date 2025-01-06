@@ -25,12 +25,26 @@ dotenv.config();
 const app = express();
 
 // Middleware configuration
+// Middleware configuration
 app.use(cors({
-    origin: ['http://127.0.0.1:5500', 'https://monkey-sweeping-bug.ngrok-free.app'],
-    credentials: true
-  }));// Enable Cross-Origin Resource Sharing
+    origin: [
+        'http://127.0.0.1:5500', 
+        'https://monkey-sweeping-bug.ngrok-free.app',
+        'https://ai-resume-analyzer-one.vercel.app'
+    ],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    optionsSuccessStatus: 200
+}));// Enable Cross-Origin Resource Sharing
 app.use(express.json());// Parse JSON request bodies
 app.use(express.static('.'));// Serve static files from the current directory
+// Add logging middleware before CORS
+app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.url}`);
+    console.log('Origin:', req.get('origin'));
+    next();
+});
 
 // Initialize Google Generative AI with API key from environment
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
